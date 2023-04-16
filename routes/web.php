@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('Home');
 });
 
+<<<<<<< HEAD
 Route::get('devis' , function () {
     return view('Devis');
 });
@@ -24,3 +25,8 @@ Route::get('devis' , function () {
 
 
 
+=======
+Route::get('/about', function () {
+    return 'hello ayman';
+});
+>>>>>>> def80c6904b983baf28fcafd0488b7ebf42f9750
