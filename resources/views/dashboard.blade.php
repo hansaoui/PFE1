@@ -10,42 +10,55 @@
     <link rel="stylesheet" href="styles.css" />
     <title>Dashboard</title>
 
- <style>
-    a{text-decoration: none;
-    color: white;}
+    <style>
+        a {
+            text-decoration: none;
+            color: white;
+        }
 
-    a:hover{
-        color: gray
-    }
+        a:hover {
+            color: gray
+        }
 
-    th, thead{
-  position: sticky;
-  top: 0;
-}
- </style>
+        th,
+        thead {
+            position: sticky;
+            top: 0;
+        }
+    </style>
 </head>
 
 <body>
 
-        
+
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-dark text-light" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
                     class="fas fa-user-secret me-2"></i>HANSAOUI</div>
             <div class="list-group list-group-flush my-3">
-                <a href="{{ url('/') }}" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="{{ url('/') }}"
+                    class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                        <a href="{{ url('/projects') }}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                            class="bi bi-person-fill-add"></i>Project Liste</a>
-                <a href="{{ url('/addorg') }}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                    class="bi bi-person-fill-add"></i>Ajouter des Organismes</a>
-                <a href="{{ url('/addprjt') }}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="{{ url('/projects') }}"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="bi bi-person-fill-add"></i>Project Liste</a>
+                <a href="{{ url('/addorg') }}"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="bi bi-person-fill-add"></i>Ajouter des Organismes</a>
+                <a href="{{ url('/addprjt') }}"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class=""></i>Ajouter des Projets</a>
-              
-        
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
-                        class="fas fa-power-off me-2"></i>Logout</a>
+
+                <a class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+                    href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -69,23 +82,33 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>John Doe
+                                <i class="fas fa-user me-2"></i>{{ auth()->user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                </li>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </ul>
                         </li>
                     </ul>
                 </div>
-            </nav>   
+            </nav>
 
 
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
                     <div class="col-md-3 ">
-                        <div class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div
+                            class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">111</h3>
                                 <p class="fs-5">Products</p>
@@ -95,7 +118,8 @@
                     </div>
 
                     <div class="col-md-3">
-                        <div class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div
+                            class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">4920</h3>
                                 <p class="fs-5">Sales</p>
@@ -106,7 +130,8 @@
                     </div>
 
                     <div class="col-md-3">
-                        <div class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div
+                            class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">3899</h3>
                                 <p class="fs-5">Delivery</p>
@@ -116,7 +141,8 @@
                     </div>
 
                     <div class="col-md-3">
-                        <div class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div
+                            class="p-3 bg-dark text-light shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">25%</h3>
                                 <p class="fs-5">Increase</p>
@@ -129,16 +155,16 @@
                 <div class="row my-5">
                     <h3 class="fs-4 mb-3 text-light">Liste d'organisme:</h3>
                     <div class="col table-responsive">
-                        <table  id="table2" class= " table bg-dark text-light ">
+                        <table id="table2" class=" table bg-dark text-light ">
                             <thead>
                                 <tr>
-                                    <th  scope="col">Code</th>
-                                    <th  scope="col">Nom</th>
-                                    <th  scope="col">Adresse</th>
-                                    <th  scope="col">Numero de telephone</th>
-                                    <th  scope="col">Le nom de contact</th>
-                                    <th  scope="col">Email de contact</th>
-                                    <th  scope="col">Adresse Web</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Adresse</th>
+                                    <th scope="col">Numero de telephone</th>
+                                    <th scope="col">Le nom de contact</th>
+                                    <th scope="col">Email de contact</th>
+                                    <th scope="col">Adresse Web</th>
                                     <th scope="col"></th>
 
 
@@ -147,22 +173,25 @@
                             <tbody>
 
                                 @foreach($organismes as $org)
-                                   <tr>
+                                <tr>
                                     <td scope="row">{{$org->id}}</td>
                                     <td scope="row">{{ $org->Nom}}</td>
                                     <td scope="row">{{ $org ->Adresse }}
                                     <td scope="row">{{ $org->Numero_de_telephone }}</td>
                                     <td scope="row">{{ $org->Le_nom_de_contact }}</td>
                                     <td scope="row">{{ $org->Email_de_contact }}</td>
-                                    <td scope="row"><a href="{{  $org->Adresse_web }}">{{ $org->Adresse_web }}</a></td> 
-                                     <td scope="row"><a  class="btn btn-outline-secondary  text-light " role="button" aria-pressed="true"  href= "{{route('organisme.edit' , $org->id)}}"> Modifier</a>
-                                     </td>
-                                    
-                                    </tr> 
+                                    <td scope="row"><a href="{{  $org->Adresse_web }}">{{ $org->Adresse_web }}</a></td>
+                                    <td scope="row"><a class="btn btn-outline-secondary  text-light " role="button"
+                                            aria-pressed="true" href="{{route('organisme.edit' , $org->id)}}">
+                                            Modifier</a>
+                                    </td>
+
+                                </tr>
                                 @endforeach
-                           
+
                             </tbody>
-                        </table> <div >{{ $organismes->links() }}</div>
+                        </table>
+                        <div>{{ $organismes->links() }}</div>
                     </div>
                 </div>
 
@@ -175,7 +204,7 @@
 
 
 
-   
+
 
 
 

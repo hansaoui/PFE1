@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrganismeController;
 use App\Http\Controllers\ProjectController;
 use App\Models\Organisme;
@@ -23,18 +24,22 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 
-Route::get('/' , [OrganismeController::class , 'show']);
-Route::get('addorg' , [OrganismeController::class , 'create']);
-Route::post('addorganisme' , [OrganismeController::class , 'store'])->name('organisme.store');
-Route::get('organisme/{id}/edit',[OrganismeController::class,'edit'])->name('organisme.edit');
-Route::put('organisme/update/{id}' , [OrganismeController::class , 'update'])->name('organisme.update');
-Route::get('/projects' , [ProjectController::class , 'show']);
-Route::get('addprjt' , [ProjectController::class , 'create']);
-Route::post('addprojects' , [ProjectController::class , 'store'])->name('project.store');
-Route::get('project/{id}/edit' , [ProjectController::class , 'edit'])->name('project.edit');
-Route::put('project/{id}/update'  , [ProjectController::class , 'update'])->name('project.update');
+Route::middleware('auth')->group(function () {
+    Route::get('/', [OrganismeController::class, 'show']);
+    Route::get('addorg', [OrganismeController::class, 'create']);
+    Route::post('addorganisme', [OrganismeController::class, 'store'])->name('organisme.store');
+    Route::get('organisme/{id}/edit', [OrganismeController::class, 'edit'])->name('organisme.edit');
+    Route::put('organisme/update/{id}', [OrganismeController::class, 'update'])->name('organisme.update');
+    Route::get('/projects', [ProjectController::class, 'show']);
+    Route::get('addprjt', [ProjectController::class, 'create']);
+    Route::post('addprojects', [ProjectController::class, 'store'])->name('project.store');
+    Route::get('project/{id}/edit', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::put('project/{id}/update', [ProjectController::class, 'update'])->name('project.update');
+});
 
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+});
 
-
-
-
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
